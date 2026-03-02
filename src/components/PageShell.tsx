@@ -10,18 +10,27 @@ interface PageShellProps {
   title: string;
   children: ReactNode;
   showBack?: boolean;
+  previousPath?: string;
 }
 
-const PageShell = ({ title, children, showBack = true }: PageShellProps) => {
+const PageShell = ({ title, children, showBack = true, previousPath }: PageShellProps) => {
   const navigate = useNavigate();
   const { totalItems } = useCart();
 
+  const handleBack = () => {
+    if (previousPath) {
+      navigate(previousPath);
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-texture flex flex-col w-full lg:max-w-4xl lg:mx-auto relative">
+    <div className="min-h-screen bg-texture flex flex-col w-full lg:max-w-4xl lg:mx-auto relative overflow-x-hidden">
       {/* Header */}
       <header className="flex items-center gap-3 px-4 pt-4 pb-2">
         {showBack && (
-          <button onClick={() => navigate(-1)} className="text-foreground">
+          <button onClick={handleBack} className="text-foreground">
             <ArrowLeft size={22} />
           </button>
         )}

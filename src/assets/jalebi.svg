@@ -1,0 +1,31 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#2a2520"/>
+  
+  <!-- Plate -->
+  <ellipse cx="100" cy="140" rx="70" ry="20" fill="#8B7355" opacity="0.5"/>
+  
+  <!-- Jalebi spiral -->
+  <g transform="translate(100, 85)">
+    <!-- Outer spiral coils -->
+    <path d="M 0,-35 Q 20,-30 25,-10 Q 28,5 20,20 Q 10,28 -5,28 Q -20,25 -28,12 Q -32,-5 -25,-22 Q -15,-32 5,-35" 
+          fill="none" stroke="#D4A017" stroke-width="8" stroke-linecap="round"/>
+    
+    <!-- Inner spiral coils -->
+    <path d="M 5,-25 Q 15,-20 18,-5 Q 20,8 12,18 Q 3,23 -8,22 Q -18,18 -23,8 Q -25,-3 -18,-18 Q -8,-27 8,-28" 
+          fill="none" stroke="#E6B800" stroke-width="7" stroke-linecap="round"/>
+    
+    <!-- Center spiral -->
+    <path d="M 2,-18 Q 10,-14 12,0 Q 12,10 5,15 Q -5,18 -12,12 Q -15,5 -12,-8 Q -5,-16 8,-18" 
+          fill="none" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+    
+    <!-- Highlight for shine -->
+    <ellipse cx="-12" cy="-15" rx="6" ry="4" fill="#FFF8DC" opacity="0.6"/>
+  </g>
+  
+  <!-- Syrup drip -->
+  <g opacity="0.4">
+    <path d="M 95 120 Q 93 130 92 145" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 105 120 Q 107 132 108 145" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

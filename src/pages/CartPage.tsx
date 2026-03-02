@@ -1,10 +1,19 @@
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 import { Plus, Minus, Trash2, ArrowLeft, CreditCard, Banknote } from "lucide-react";
+import { useState } from "react";
+import halftea1Img from "@/assets/halftea1.svg";
+import jalebi1Img from "@/assets/jalebi1.svg";
+import samosa1Img from "@/assets/samosa1.svg";
+import kachori1Img from "@/assets/kachori1.svg";
 
 const CartPage = () => {
-  const { items, totalItems, totalPrice, updateQuantity, removeItem, clearCart } = useCart();
+  const { items, totalItems, totalPrice, updateQuantity, removeItem, clearCart, addItem } = useCart();
   const navigate = useNavigate();
+  const [pickupTime, setPickupTime] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
 
   if (totalItems === 0) {
     return (
@@ -85,6 +94,29 @@ const CartPage = () => {
           </div>
         ))}
 
+        {/* Add‑ons (suggested extras) */}
+        <div className="card-rustic rounded-xl p-4 space-y-3">
+          <h3 className="font-display text-base text-foreground">Add more?</h3>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { id: "half-tea", name: "Half Tea", price: 15, image: halftea1Img },
+              { id: "jalebi", name: "Jalebi", price: 10, image: jalebi1Img },
+              { id: "samosa", name: "Samosa", price: 15, image: samosa1Img },
+              { id: "kachori", name: "Kachori", price: 15, image: kachori1Img },
+            ].map((extra) => (
+              <button
+                key={extra.id}
+                onClick={() =>
+                  addItem({ id: extra.id, name: extra.name, price: extra.price, image: extra.image })
+                }
+                className="px-3 py-1 rounded-full bg-secondary text-foreground text-sm border border-border hover:bg-secondary/80 transition"
+              >
+                + {extra.name} ₹{extra.price}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Order Summary */}
         <div className="card-rustic rounded-xl p-4 space-y-3">
           <h3 className="font-display text-base text-foreground">Order Summary</h3>
@@ -93,25 +125,46 @@ const CartPage = () => {
               <span>Subtotal ({totalItems} items)</span>
               <span>₹{totalPrice}</span>
             </div>
-            <div className="flex justify-between text-muted-foreground">
-              <span>Packaging</span>
-              <span>₹10</span>
-            </div>
             <div className="border-t border-border pt-2 flex justify-between text-foreground font-bold">
               <span>Total</span>
-              <span className="text-gold">₹{totalPrice + 10}</span>
+              <span className="text-gold">₹{totalPrice}</span>
             </div>
           </div>
         </div>
 
-        {/* Pickup Info */}
-        <div className="card-rustic rounded-xl p-4 text-center">
-          <p className="text-xs text-muted-foreground">
-            <span className="text-foreground font-medium">Pickup Only</span> • No Delivery
-          </p>
-          <p className="text-[10px] text-muted-foreground mt-1">
-            Fried 5–7 min before your arrival. Fresh & hot!
-          </p>
+      
+        {/* Customer Details */}
+        <div className="card-rustic rounded-xl p-4 space-y-3">
+          <h3 className="font-display text-base text-foreground">Your Details</h3>
+          <div className="space-y-2">
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg bg-secondary text-foreground"
+            />
+            <input
+              type="tel"
+              placeholder="Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg bg-secondary text-foreground"
+            />
+            {/* time picker with label above */}
+            <div className="space-y-1">
+              <label className="text-foreground text-sm">Pickup time</label>
+              <input
+                type="time"
+                value={pickupTime}
+                onChange={(e) => setPickupTime(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-secondary text-foreground"
+              />
+            </div>
+          </div>
+          {error && (
+            <p className="text-sm text-destructive mt-1">{error}</p>
+          )}
         </div>
 
         {/* Payment Options */}
@@ -120,14 +173,6 @@ const CartPage = () => {
           <div className="space-y-2">
             <label className="flex items-center gap-3 p-3 rounded-lg bg-secondary cursor-pointer border-2 border-primary">
               <input type="radio" name="payment" defaultChecked className="accent-[hsl(38,75%,50%)]" />
-              <Banknote size={18} className="text-gold" />
-              <div>
-                <p className="text-sm text-foreground font-medium">Pay at Pickup</p>
-                <p className="text-[10px] text-muted-foreground">Cash or UPI on arrival</p>
-              </div>
-            </label>
-            <label className="flex items-center gap-3 p-3 rounded-lg bg-secondary cursor-pointer border-2 border-transparent">
-              <input type="radio" name="payment" className="accent-[hsl(38,75%,50%)]" />
               <CreditCard size={18} className="text-gold" />
               <div>
                 <p className="text-sm text-foreground font-medium">Pay Online</p>
@@ -140,8 +185,35 @@ const CartPage = () => {
 
       {/* Place Order Button */}
       <div className="px-4 pb-6 pt-2">
-        <button className="w-full bg-gold-gradient text-primary-foreground font-bold py-4 rounded-2xl text-lg transition-transform active:scale-[0.98]">
-          Place Order • ₹{totalPrice + 10}
+        <button
+          onClick={() => {
+            // reset previous error on each click
+            setError("");
+            if (!name || !phone || !pickupTime) {
+              // build professional message listing missing fields
+              const missing: string[] = [];
+              if (!name) missing.push("name");
+              if (!phone) missing.push("phone number");
+              if (!pickupTime) missing.push("pickup time");
+              // format list with commas and 'and'
+              let list = "";
+              if (missing.length === 1) {
+                list = missing[0];
+              } else if (missing.length === 2) {
+                list = `${missing[0]} and ${missing[1]}`;
+              } else if (missing.length > 2) {
+                list = missing.slice(0, -1).join(", ") + 
+                      ", and " + missing[missing.length - 1];
+              }
+              setError(`Please enter your ${list} before proceeding.`);
+              return;
+            }
+            const order = { name, phone, pickupTime, total: totalPrice, items };
+            navigate("/payment", { state: order });
+          }}
+          className="w-full bg-gold-gradient text-primary-foreground font-bold py-4 rounded-2xl text-lg transition-transform active:scale-[0.98]"
+        >
+          Book for Pickup • ₹{totalPrice + 10}
         </button>
       </div>
     </div>

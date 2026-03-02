@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 const navItems = [
   { label: "Vision", path: "/vision" },
   { label: "Model", path: "/model" },
-  { label: "Campus", path: "/campus" },
   { label: "Scale", path: "/scale" },
+  { label: "About", path: "/about" },
 ];
 
 const BottomNav = () => {

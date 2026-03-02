@@ -1,0 +1,36 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#2a2520"/>
+  
+  <!-- Single Half Tea Cup -->
+  <g transform="translate(100, 80)">
+    <!-- Cup body -->
+    <path d="M -25,-20 L -20,30 Q -20,35 -15,35 L 15,35 Q 20,35 20,30 L 25,-20 Z" 
+          fill="#C85A54" stroke="#8B3A2E" stroke-width="2"/>
+    
+    <!-- Cup rim highlight -->
+    <ellipse cx="0" cy="-20" rx="25" ry="8" fill="#D97563" opacity="0.7"/>
+    
+    <!-- Tea liquid - half fill -->
+    <ellipse cx="0" cy="10" rx="18" ry="6" fill="#8B6914"/>
+    <path d="M -18,10 L -16,30 Q -16,33 -12,33 L 12,33 Q 16,33 16,30 L 18,10" fill="#A0860A"/>
+    
+    <!-- Tea surface with foam -->
+    <ellipse cx="0" cy="9" rx="18" ry="5" fill="#D4A017" opacity="0.6"/>
+    
+    <!-- Foam bubbles -->
+    <circle cx="-10" cy="8" r="2.5" fill="#FFE4B5" opacity="0.7"/>
+    <circle cx="0" cy="7" r="2" fill="#FFE4B5" opacity="0.7"/>
+    <circle cx="10" cy="8" r="2.5" fill="#FFE4B5" opacity="0.7"/>
+    <circle cx="-5" cy="6" r="1.5" fill="#FFE4B5" opacity="0.6"/>
+    <circle cx="5" cy="6" r="1.5" fill="#FFE4B5" opacity="0.6"/>
+    
+    <!-- Cup handle -->
+    <path d="M 25,-10 Q 40,-5 40,10" fill="none" stroke="#C85A54" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 25,-10 Q 38,-5 38,10" fill="none" stroke="#D97563" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    
+    <!-- Steam wisps -->
+    <path d="M -8,-25 Q -10,-35 -5,-40" fill="none" stroke="#FFE4B5" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+    <path d="M 8,-25 Q 10,-35 5,-40" fill="none" stroke="#FFE4B5" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  </g>
+</svg>

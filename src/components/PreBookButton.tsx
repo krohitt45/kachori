@@ -12,7 +12,7 @@ const PreBookButton = () => {
         totalItems > 0 ? "py-3 text-base" : "py-4 text-lg"
       }`}
     >
-      Pre-Book Pickup
+      Order for Pickup
     </button>
   );
 };

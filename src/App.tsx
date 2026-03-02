@@ -7,9 +7,11 @@ import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import Vision from "./pages/Vision";
 import Model from "./pages/Model";
-import Campus from "./pages/Campus";
 import Scale from "./pages/Scale";
+import AboutUs from "./pages/AboutUs";
 import CartPage from "./pages/CartPage";
+import Payment from "./pages/Payment";
+import Confirmation from "./pages/Confirmation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,9 +27,11 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/vision" element={<Vision />} />
             <Route path="/model" element={<Model />} />
-            <Route path="/campus" element={<Campus />} />
             <Route path="/scale" element={<Scale />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/confirmation" element={<Confirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

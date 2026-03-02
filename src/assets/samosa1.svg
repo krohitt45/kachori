@@ -1,0 +1,26 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#2a2520"/>
+  
+  <!-- Plate -->
+  <ellipse cx="100" cy="140" rx="70" ry="20" fill="#8B7355" opacity="0.5"/>
+  
+  <!-- Single Samosa -->
+  <g transform="translate(100, 90)">
+    <!-- Samosa triangular shape -->
+    <path d="M 0,-40 L 35,25 L -35,25 Z" fill="#D4A017" stroke="#8B6914" stroke-width="1"/>
+    
+    <!-- Lighter side for depth -->
+    <path d="M 0,-40 L 35,25 L 0,15 Z" fill="#E6B800" opacity="0.7"/>
+    
+    <!-- Darker side for shadow -->
+    <path d="M 0,-40 L -35,25 L 0,15 Z" fill="#A0860A" opacity="0.6"/>
+    
+    <!-- Texture lines -->
+    <path d="M 5,-35 L 28,20" stroke="#8B6914" stroke-width="1" opacity="0.5"/>
+    <path d="M -5,-35 L 25,22" stroke="#8B6914" stroke-width="1" opacity="0.5"/>
+    
+    <!-- Crispy shine -->
+    <ellipse cx="10" cy="-10" rx="8" ry="6" fill="#FFF8DC" opacity="0.5"/>
+  </g>
+</svg>

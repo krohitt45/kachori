@@ -1,7 +1,6 @@
 import MenuCard from "@/components/MenuCard";
 import BottomNav from "@/components/BottomNav";
 import CartBar from "@/components/CartBar";
-import PreBookButton from "@/components/PreBookButton";
 import { useCart } from "@/contexts/CartContext";
 
 import heroImg from "@/assets/hero.png";
@@ -24,7 +23,7 @@ const Index = () => {
   const { totalItems } = useCart();
 
   return (
-    <div className="min-h-screen bg-texture flex flex-col w-full relative">
+    <div className="min-h-screen bg-texture flex flex-col w-full relative overflow-x-hidden">
       {/* Hero */}
       <div className="relative">
         <img
@@ -33,13 +32,17 @@ const Index = () => {
           className="w-full h-64 md:h-80 lg:h-96 object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-2xl">🥟</span>
-            <h1 className="font-display text-xl text-foreground font-bold">Kachori Kothi</h1>
+        {/* Top-left header */}
+        <div className="absolute top-2 left-2">
+          <div className="flex items-center gap-1">
+            <img src="/logo.png" alt="Kachori Kothi logo" className="w-8 h-8 object-contain" />
+            <h1 className="font-display text-sm md:text-base text-foreground font-bold">Kachori Kothi</h1>
           </div>
+        </div>
+        {/* Middle tagline */}
+        <div className="absolute left-4 top-1/2 -translate-y-1/2">
           <p className="text-foreground font-display text-lg leading-tight">
-            Fresh Kachori.{" "}
+            Fresh Kachori. {" "}
             <span className="text-gold font-bold">Smart Pickup.</span>
           </p>
           <p className="text-muted-foreground text-xs mt-1">
@@ -68,14 +71,10 @@ const Index = () => {
         </p>
       </div>
 
-      {/* Pre-Book + Nav */}
+      {/* Nav + footer */}
       <div className={`px-4 ${totalItems > 0 ? "pb-20" : "pb-4"}`}>
-        <PreBookButton />
         <BottomNav />
-        <div className="flex items-center justify-center gap-2 text-[10px] text-muted-foreground mt-2">
-          <span>About</span>•<span>Franchise</span>•<span>Contact</span>•<span>Privacy</span>
-        </div>
-        <p className="text-center text-[10px] text-muted-foreground mt-1">
+        <p className="text-center text-[10px] text-muted-foreground mt-2">
           © 2024 Kachori Kothi. All rights reserved.
         </p>
       </div>
